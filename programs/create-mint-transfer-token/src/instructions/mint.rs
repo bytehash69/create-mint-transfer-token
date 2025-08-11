@@ -11,7 +11,7 @@ pub struct MintToken<'info> {
     #[account(mut)]
     pub mint_authority: Signer<'info>,
 
-    pub recipient: SystemAccount<'info>,
+    pub receiver: SystemAccount<'info>,
 
     #[account(mut)]
     pub mint_account: Account<'info, Mint>,
@@ -20,7 +20,7 @@ pub struct MintToken<'info> {
         init_if_needed,
         payer = mint_authority,
         associated_token::mint = mint_account,
-        associated_token::authority = recipient,
+        associated_token::authority = receiver,
     )]
     pub associated_token_account: Account<'info, TokenAccount>,
 
@@ -42,7 +42,7 @@ impl<'info> MintToken<'info> {
             MintTo {
                 authority: self.mint_authority.to_account_info(),
                 mint: self.mint_account.to_account_info(),
-                to: self.recipient.to_account_info(),
+                to: self.associated_token_account.to_account_info(),
             },
         );
 
