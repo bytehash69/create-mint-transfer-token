@@ -50,7 +50,7 @@ impl<'info> TransferToken<'info> {
             },
         );
 
-        transfer(transfer_cpi_ctx, amount);
+        transfer(transfer_cpi_ctx, amount)?;
         Ok(())
     }
 }

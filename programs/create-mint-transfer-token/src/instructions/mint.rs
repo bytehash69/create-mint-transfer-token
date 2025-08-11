@@ -49,7 +49,7 @@ impl<'info> MintToken<'info> {
         mint_to(
             mint_to_cpi_ctx,
             amount * 10u64.pow(self.mint_account.decimals as u32),
-        );
+        )?;
 
         msg!("Token minted successfully");
         Ok(())
